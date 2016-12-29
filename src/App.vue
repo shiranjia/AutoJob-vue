@@ -1,14 +1,13 @@
 <template>
   <div id="app">
-    <img class="logo" src="./assets/logo.png">
-    <job></job>
+    <img src="./assets/logo.png">
+    <Job></Job>
   </div>
 </template>
-
 <script>
 import Job from './components/Job'
-
 export default {
+  name: 'app',
   components: {
     Job
   }
@@ -16,25 +15,12 @@ export default {
 </script>
 
 <style>
-html {
-  height: 100%;
-  width: 100%;
-}
-
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
 #app {
-}
-#app a {
-  color: #42b983;
-  text-decoration: none;
-}
-.logo {
-  width: 100px;
-  height: 100px
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 </style>
