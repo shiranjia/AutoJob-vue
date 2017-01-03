@@ -3,13 +3,11 @@
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
-import VueResource from 'vue-resource'
 
 import Home from './components/Home.vue'
 import Job from './components/Job'
 
 Vue.use(VueRouter)
-Vue.use(VueResource)
 
 const routes = [{
   path: '/',
