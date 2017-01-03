@@ -3,19 +3,21 @@
     <div v-for="(job, _index) in jobs">
       <div :id="_index" class="job">
         <H2>JobName: {{job.Name}}</H2><br>
-        {{job.msg}}
         <div>
-          ssh.userName: <input v-model="job.userName">
-          ssh.password: <input v-model="job.password">
-          ssh.ip:  <input v-model="ip">
+          ssh.userName: <input v-model="job.Config.User">
+          ssh.password: <input v-model="job.Config.Password">
+          ssh.ip:  <input v-model="job.Config.Ip">
         </div>
         <br>
         <div>
           本地命令 (执行路径;命令;参数(参数用空格隔开) example:E:\github\ticket.h5\web;mvn;clean package -Dmaven.test.skip=true -P artifactory,development -Dfile.encoding=UTF-8 ):
           <button v-on:click="addlB()">ADD</button>
           <br>
-          <ul><li v-for="(lb, index) in job.localBefore">
-            <input v-model="lb.text" size="150"><button v-on:click="removelB(index)">X</button>
+          <ul><li v-for="(lb, lb_index) in job.LocalBefore">
+            Path<input v-model="lb.Path" size="50">
+            Command<input v-model="lb.Command" size="50">
+            Args<input v-model="lb.Args" size="50">
+            <button v-on:click="removelB(lb_index)">X</button>
           </li></ul>
         </div>
         <div>
@@ -71,13 +73,23 @@ export default {
       jobs: [
         {
           Name: '',
-          userName: '192.168.1.1',
-          password: '123a',
-
-          localBefore: [
-                  { text: 'Learn JavaScript' },
-                  { text: 'Learn Vue.js' },
-                  { text: 'Build Something Awesome' }],
+          Config: {
+            User: '192.168.1.1',
+            Password: '123a',
+            Ip: ''
+          },
+          LocalBefore: [
+            {
+              Path: 'Learn JavaScript',
+              Command: 'package',
+              Args: ['clean']
+            },
+            {
+              Path: 'Learn JavaScript',
+              Command: 'clean',
+              Args: ['clean']
+            }
+          ],
           remoteBefore: [
                    { text: 'Learn JavaScript' },
                    { text: 'Learn Vue.js' },
