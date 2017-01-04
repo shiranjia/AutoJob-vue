@@ -1,4 +1,4 @@
-<template xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<template xmlns:v-on="http://www.w3.org/1999/xhtml">
   <div  class="jumbotron">
     <div v-for="(job, _index) in jobs">
         <div :id="_index" class="job" v-show="job.show">
@@ -78,8 +78,7 @@ export default {
           RemoteBefore: [],
           UploadJob: {},
           LocalAfter: [],
-          RemoteAfter: [],
-          msg: ''
+          RemoteAfter: []
         }
       ]
     }
