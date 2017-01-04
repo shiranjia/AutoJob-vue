@@ -1,6 +1,6 @@
-# n
+# a vue project for AutoJob
 
-> A Vue.js project
+> AutoJob view
 
 ## Build Setup
 
