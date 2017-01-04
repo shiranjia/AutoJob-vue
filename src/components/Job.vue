@@ -70,6 +70,7 @@
 <script>
 import Vue from 'vue'
 import VueResource from 'vue-resource'
+import util from '../common/util.js'
 Vue.use(VueResource)
 Vue.http.options.emulateHTTP = true
 export default {
@@ -86,20 +87,13 @@ export default {
           },
           LocalBefore: [
             {
-              Path: 'Learn JavaScript',
-              Command: 'package',
-              Args: ['clean']
-            },
-            {
-              Path: 'Learn JavaScript',
-              Command: 'clean',
-              Args: ['clean']
+              Path: '/home',
+              Command: 'free',
+              Args: ['-a']
             }
           ],
           RemoteBefore: [
-                   { Command: 'Learn JavaScript' },
-                   { Command: 'Learn Vue.js' },
-                   { Command: 'Build Something Awesome' }
+                   { Command: '' }
           ],
           UploadJob: {
             LocalPath: '',
@@ -113,9 +107,8 @@ export default {
             }
           ],
           RemoteAfter: [
-                    { Command: 'Learn JavaScript' },
-                    { Command: 'Learn Vue.js' },
-                    { Command: 'Build Something Awesome' }],
+                    { Command: '' }
+          ],
           msg: ''
         }
       ]
@@ -175,8 +168,21 @@ export default {
     update: function (_index) {
       // console.log(this.jobs[_index])
       let json = JSON.stringify(this.jobs[_index])
+      json = util.filterJSON(json)
       console.log(json)
       this.$http.get('http://localhost/rest/saveOrUpdate', {params: {job: json}}).then((response) => {
+        // 响应成功回调
+        console.log(response)
+      }, (response) => {
+        // 响应错误回调
+        console.log(response)
+      })
+    },
+    delete: function (_index) {
+      let json = JSON.stringify(this.jobs[_index])
+      json = util.filterJSON(json)
+      console.log(json)
+      this.$http.get('http://localhost/rest/delete', {params: {job: json}}).then((response) => {
         // 响应成功回调
         console.log(response)
       }, (response) => {

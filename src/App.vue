@@ -7,7 +7,8 @@
           Home
         </a>
         <ul class="nav navbar-nav">
-          <li><router-link to="/job">任务</router-link></li>
+          <li><router-link to="/job">任务列表</router-link></li>
+          <li><router-link to="/newJob">新任务</router-link></li>
           <!--<li><router-link to="/time-entries">计划列表</router-link></li>-->
         </ul>
       </div>
