@@ -16,14 +16,14 @@
         </div>
         <br>
         <div>
-          本地命令 (执行路径 命令 参数 example:E:\github\ticket.h5\web;mvn clean package -Dmaven.test.skip=true -P artifactory,development -Dfile.encoding=UTF-8 ):
+          本地命令 (执行路径 命令 参数 example:E:\github\ticket.h5\web mvn 参数用json数组[  "clean",  "package",  "-Dmaven.test.skip=true",  "-P",  "artifactory,development",  "-Dfile.encoding=UTF-8"] ):
           <button v-on:click="addlB(_index)">ADD</button>
           <br>
           <ul><li v-for="(lb, lb_index) in job.LocalBefore">
             路径:<input v-model="lb.Path" size="30">
             命令:<input v-model="lb.Command" size="30">
             参数:<input v-model="lb.Args" size="50">
-            <button v-on:click="removelB(_index,lb_index)">X</button>
+            <button v-on:click="removelB(_index,lb_index)">X</button><br>
           </li></ul>
         </div>
         <div>
@@ -40,14 +40,14 @@
         </div>
         <br>
         <div>
-          上传文件后本地命令 (执行路径 命令 参数 example:E:\github\ticket.h5\web mvn clean package -Dmaven.test.skip=true -P artifactory,development -Dfile.encoding=UTF-8 ):
+          上传文件后本地命令 (执行路径 命令 参数 example:E:\github\ticket.h5\web mvn <br>):
           <button v-on:click="addlA(_index)">ADD</button>
           <br>
           <ul><li v-for="(la, index) in job.LocalAfter">
             路径:<input v-model="la.Path" size="30">
             命令:<input v-model="la.Command" size="30">
             参数:<input v-model="la.Args" size="50">
-            <button v-on:click="removelA(_index,index)">X</button>
+            <button v-on:click="removelA(_index,index)">X</button><br>
           </li></ul>
         </div>
         <div>
@@ -60,7 +60,7 @@
         </div>
         <br>
         <div>
-          <button>deploy</button><button v-on:click="update(_index)">update</button><button>remove</button>
+          <button v-on:click="deploy(_index)">deploy</button><button v-on:click="update(_index)">update</button><button v-on:click="deleted(_index)">remove</button>
         </div>
       </div>
       </transition>
@@ -178,11 +178,25 @@ export default {
         console.log(response)
       })
     },
-    delete: function (_index) {
+    deleted: function (_index) {
       let json = JSON.stringify(this.jobs[_index])
       json = util.filterJSON(json)
       console.log(json)
       this.$http.get('http://localhost/rest/delete', {params: {job: json}}).then((response) => {
+        // 响应成功回调
+        console.log(response)
+        this.jobs[0].show = true
+        this.jobs.splice(_index, 1)
+      }, (response) => {
+        // 响应错误回调
+        console.log(response)
+      })
+    },
+    deploy: function (_index) {
+      let json = JSON.stringify(this.jobs[_index])
+      json = util.filterJSON(json)
+      console.log(json)
+      this.$http.get('http://localhost/rest/deploy', {params: {job: json}}).then((response) => {
         // 响应成功回调
         console.log(response)
       }, (response) => {

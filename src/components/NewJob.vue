@@ -2,7 +2,7 @@
   <div  class="jumbotron">
     <div v-for="(job, _index) in jobs">
         <div :id="_index" class="job" v-show="job.show">
-          <H2>JobName: {{job.Name}}</H2><br>
+          <H2>JobName: <input v-model="job.Name"></H2><br>
           <div>
             ssh.userName: <input v-model="job.Config.User">
             ssh.password: <input v-model="job.Config.Password">
@@ -17,7 +17,7 @@
               路径:<input v-model="lb.Path" size="30">
               命令:<input v-model="lb.Command" size="30">
               参数:<input v-model="lb.Args" size="50">
-              <button v-on:click="removelB(_index,lb_index)">X</button>
+              <button v-on:click="removelB(_index,lb_index)">X</button><br>
             </li></ul>
           </div>
           <div>
@@ -41,7 +41,7 @@
               路径:<input v-model="la.Path" size="30">
               命令:<input v-model="la.Command" size="30">
               参数:<input v-model="la.Args" size="50">
-              <button v-on:click="removelA(_index,index)">X</button>
+              <button v-on:click="removelA(_index,index)">X</button><br>
             </li></ul>
           </div>
           <div>
@@ -134,6 +134,12 @@ export default {
       this.removelA(this.jobs.length - 1, this.jobs[this.jobs.length - 1].LocalAfter.length - 1)
     },
     update: function (_index) {
+      // console.log(_index)
+      // console.log(this.jobs.length)
+      if (this.jobs[_index] == null) {
+        console.log('name must not null!') // -> returns a promise
+        return
+      }
       let json = JSON.stringify(this.jobs[_index])
       json = util.filterJSON(json)
       console.log(json)
