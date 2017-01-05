@@ -5,12 +5,12 @@
           <H2>JobName: <input v-model="job.Name"></H2><br>
           <div>
             ssh.userName: <input v-model="job.Config.User">
-            ssh.password: <input v-model="job.Config.Password">
+            ssh.password: <input v-model="job.Config.Password" type="password">
             ssh.ip:  <input v-model="job.Config.Ip">
           </div>
           <br>
           <div>
-            本地命令 (执行路径 命令 参数 example:E:\github\ticket.h5\web;mvn clean package -Dmaven.test.skip=true -P artifactory,development -Dfile.encoding=UTF-8 ):
+            本地命令 (执行路径 命令 参数 example:E:\github\ticket.h5\web mvn 参数用json数组[  "clean",  "package",  "-Dmaven.test.skip=true",  "-P",  "artifactory,development",  "-Dfile.encoding=UTF-8"] ):
             <button v-on:click="addlB(_index)">ADD</button>
             <br>
             <ul><li v-for="(lb, lb_index) in job.LocalBefore">
@@ -34,7 +34,7 @@
           </div>
           <br>
           <div>
-            上传文件后本地命令 (执行路径 命令 参数 example:E:\github\ticket.h5\web mvn clean package -Dmaven.test.skip=true -P artifactory,development -Dfile.encoding=UTF-8 ):
+            上传文件后本地命令 (执行路径 命令 参数 example:E:\github\ticket.h5\web mvn 参数用json数组[  "clean",  "package",  "-Dmaven.test.skip=true",  "-P",  "artifactory,development",  "-Dfile.encoding=UTF-8"] ):
             <button v-on:click="addlA(_index)">ADD</button>
             <br>
             <ul><li v-for="(la, index) in job.LocalAfter">
@@ -125,7 +125,7 @@ export default {
       this.jobs[_index].RemoteAfter.splice(index, 1)
     },
     chooseJob: function (event) {
-      let index = event.explicitOriginalTarget.index
+      let index = event.target.selectedIndex
       for (let i = 0; i < this.jobs.length; i++) {
         this.jobs[i].show = false
       }
