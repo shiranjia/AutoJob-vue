@@ -206,11 +206,13 @@ export default {
     }
   },
   created () {
-    Vue.http.get('http://localhost/rest', {name: 'bar'}).then((response) => {
+    Vue.http.get('http://localhost/rest', {name: 'jobList'}).then((response) => {
       let JS = JSON.parse(response.data)
       let jobs = JS.JS.jobs
       this.$set(this, 'jobs', jobs)
-      jobs[0].show = true
+      if (this.jobs.length > 0) {
+        this.jobs[0].show = true
+      }
     }, (response) => { // error callback
     })
   }
