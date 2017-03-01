@@ -6,6 +6,7 @@
           <div>
             ssh.userName: <input v-model="job.Config.User">
             ssh.password: <input v-model="job.Config.Password" type="password">
+            ssh.privateKey: <input v-model="job.Config.KeyPath">
             ssh.ip:  <input v-model="job.Config.Ip">
           </div>
           <br>

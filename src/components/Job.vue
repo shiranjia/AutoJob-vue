@@ -12,6 +12,7 @@
         <div>
           ssh.userName: <input v-model="job.Config.User">
           ssh.password: <input v-model="job.Config.Password" type="password">
+          ssh.privateKey: <input v-model="job.Config.KeyPath">
           ssh.ip:  <input v-model="job.Config.Ip">
         </div>
         <br>
@@ -83,6 +84,7 @@ export default {
           Config: {
             User: '192.168.1.1',
             Password: '123a',
+            KeyPath: '.ssh/key',
             Ip: ''
           },
           LocalBefore: [
