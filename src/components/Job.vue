@@ -176,6 +176,7 @@ export default {
       this.$http.get('http://localhost/rest/saveOrUpdate', {params: {job: json}}).then((response) => {
         // 响应成功回调
         console.log(response)
+        util.alt('update success!')
       }, (response) => {
         // 响应错误回调
         console.log(response)
@@ -190,6 +191,7 @@ export default {
         console.log(response)
         this.jobs[0].show = true
         this.jobs.splice(_index, 1)
+        util.alt('delete success!')
       }, (response) => {
         // 响应错误回调
         console.log(response)
@@ -202,6 +204,7 @@ export default {
       this.$http.get('http://localhost/rest/deploy', {params: {job: json}}).then((response) => {
         // 响应成功回调
         console.log(response)
+        util.alt('deploy success!')
       }, (response) => {
         // 响应错误回调
         console.log(response)
@@ -216,6 +219,7 @@ export default {
       if (this.jobs.length > 0) {
         this.jobs[0].show = true
       }
+      util.alt('create success!')
     }, (response) => { // error callback
     })
   }

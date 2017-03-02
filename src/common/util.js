@@ -14,6 +14,10 @@ export default{
       json = json.replace('\\\\', '/')
     }
     return json
+  },
+
+  alt(msg){
+    alert(msg)
   }
 }
 

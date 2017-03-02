@@ -147,6 +147,7 @@ export default {
       this.$http.get('http://localhost/rest/saveOrUpdate', {params: {job: json}}).then((response) => {
         // 响应成功回调
         console.log(response)
+        util.alt('create success!')
       }, (response) => {
         // 响应错误回调
         console.log(response)
